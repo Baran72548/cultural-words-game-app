@@ -1,0 +1,48 @@
+<resources>
+    <string name="app_name">لعبة الكلمات التراثية</string>
+    <string name="view_answer">عرض الإجابة</string>
+    <string name="change_image">تغيير الصورة</string>
+    <string name="share_image">مشاركة الصورة</string>
+    <string name="back">العودة</string>
+    <string name="the_answer_is">الإجابة هي</string>
+    <string name="share">مشاركة</string>
+    <string name="change_language">تغيير اللغة</string>
+    <string name="permission_title">توضيح</string>
+    <string name="permission_explanation">يحتاج التطبيق للحصول على صلاحية الكتابة على وحدة التخزين الخارجية لتخزين الصورة تمهيداً لإتاحة مشاركتها من خلال التطبيقات الأخرى</string>
+    <string name="permission_denied">لم يتم تنفيذ العملية بسبب عدم منح الصلاحيات اللازمة لتنفيذها</string>
+    <string name="eqal">العقال</string>
+    <string name="farwa">الفروة</string>
+    <string name="sadoo">السدو</string>
+    <string name="hinaa">الحناء</string>
+    <string name="dala">الدلة</string>
+    <string name="khif">الخف</string>
+    <string name="kingar">الخنجر</string>
+    <string name="namraqa">النمرقة</string>
+    <string name="qendeel">القنديل / السراج</string>
+    <string name="fanoos">الفانوس</string>
+    <string name="tarboosh">الطربوش</string>
+    <string name="emama">العمامة</string>
+    <string name="dishdasha">الدشداشة</string>
+
+    <string-array name="answer_description">
+        <item>يوضع فوق الحطّة\الغترة لتثبيتها</item>
+        <item>مبطنة بالصوف، تلبس في الشتاء للوقاية من البرد</item>
+        <item>أحد أنواع النسيج البدوي التقليدي</item>
+        <item>تستخدم في صبغ الشعر واللحية، كما تستخدم أيضاً في تجميل الأيدي بالنسبة للنساء</item>
+        <item>الوعاء المستخدم في تقديم القهوة عند العرب</item>
+        <item>مصنوع من الجلد، يُلبس في القدم، اشتُهر قديماً عند العرب</item>
+        <item>سلاح أبيض صغير يوضع على الخصر</item>
+        <item>وسادة صغيرة يُتكأ عليها</item>
+        <item>اسم الأداة التي كانت تُستخدم للإضاءة قديمًا</item>
+        <item>أداة تُستخدم للإضاءة والزينة</item>
+        <item>قبعة حمراء اشتهرت في بلاد الشام ومصر والمغرب</item>
+        <item>غطاء يُكوّر فوق الرأس</item>
+        <item>ثوب عربي يُلبس بكثرة في دول الخليج</item>
+    </string-array>
+
+    <array name="languages">
+        <item>العربية</item>
+        <item>English</item>
+    </array>
+
+</resources>

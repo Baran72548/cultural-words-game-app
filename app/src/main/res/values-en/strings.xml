@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Cultural Words Game</string>
+    <string name="view_answer">View Answer</string>
+    <string name="change_image">Change Image</string>
+    <string name="share_image">Share Image</string>
+    <string name="back">Return</string>
+    <string name="the_answer_is">The Answer is</string>
+    <string name="share">Share</string>
+    <string name="change_language">Change Language</string>
+    <string name="permission_title">توضيح</string>
+    <string name="permission_explanation">The application needs to have write access to the external storage to store the image in preparation for sharing it through other applications</string>
+    <string name="permission_denied">The operation was not performed because the necessary permissions were not granted to implement it</string>
+    <string name="eqal">Eqal</string>
+    <string name="farwa">Farwa</string>
+    <string name="sadoo">Sadoo</string>
+    <string name="hinaa">Hinaa</string>
+    <string name="dala">Dala</string>
+    <string name="khif">Khif</string>
+    <string name="kingar">kingar</string>
+    <string name="namraqa">Namraqa</string>
+    <string name="qendeel">Qendeel / Seraj</string>
+    <string name="fanoos">Fanoos</string>
+    <string name="tarboosh">Tarboosh</string>
+    <string name="emama">Emama</string>
+    <string name="dishdasha">Dishdasha</string>
+
+    <string-array name="answer_description">
+        <item>Placed above ghutra / hatta to keep it from moving</item>
+        <item>Padded with wool, worn in the winter to prevent cold</item>
+        <item>One of the traditional types of Bedouin fabric</item>
+        <item>It is used to dye hair and beard, and it is also used to beautify hands for women</item>
+        <item>The bowl used to serve coffee for Arabs</item>
+        <item>Made of leather, worn in the foot, it was famous ancient times among the Arabs</item>
+        <item>A small white weapon placed on the waist</item>
+        <item>Small pillow to lean on</item>
+        <item>The name of the tool that was used for lighting in the past</item>
+        <item>A tool used for lighting and decoration</item>
+        <item>A red hat famous in Sham, Egypt and Morocco</item>
+        <item>Covered over the head</item>
+        <item>An Arab dress worn frequently in the Gulf countries</item>
+    </string-array>
+</resources>
