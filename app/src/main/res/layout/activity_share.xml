@@ -32,7 +32,7 @@
         android:layout_marginEnd="8dp"
         android:layout_marginRight="8dp"
         android:layout_marginBottom="8dp"
-        app:layout_constraintBottom_toTopOf="@+id/divider2"
+        app:layout_constraintBottom_toTopOf="@+id/guideline"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/textView"
@@ -52,13 +52,13 @@
         android:gravity="right"
         android:hint="@string/share_image"
         android:inputType="textPersonName"
-        app:layout_constraintBottom_toTopOf="@+id/return_button2"
+        app:layout_constraintBottom_toTopOf="@+id/share_button"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/divider2" />
+        app:layout_constraintTop_toBottomOf="@+id/shared_image_view" />
 
     <Button
-        android:id="@+id/return_button2"
+        android:id="@+id/share_button"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
@@ -67,7 +67,6 @@
         android:layout_marginRight="16dp"
         android:layout_marginBottom="16dp"
         android:background="@drawable/buttons_selector"
-        android:onClick="onShareClicked"
         android:text="@string/share"
         android:textColor="@drawable/text_selector"
         android:textSize="20sp"
@@ -75,12 +74,11 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
 
-    <View
-        android:id="@+id/divider2"
-        android:layout_width="0dp"
-        android:layout_height="1dp"
-        app:layout_constraintBottom_toBottomOf="@+id/shared_title_edit_text"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView" />
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.5" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

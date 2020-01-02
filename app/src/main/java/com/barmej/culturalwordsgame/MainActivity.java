@@ -11,8 +11,6 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
-import android.graphics.Bitmap;
-import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.view.Menu;
@@ -23,10 +21,6 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.Toast;
 
-import java.io.ByteArrayOutputStream;
-import java.io.File;
-import java.io.FileOutputStream;
-import java.io.IOException;
 import java.util.Random;
 
 public class MainActivity extends AppCompatActivity {
@@ -150,38 +144,12 @@ public class MainActivity extends AppCompatActivity {
      * Creating an Intent to start a new activity and share the image there.
      */
     public void shareImage(){
-        ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
         CulturalWord image = mCulturalWords[mCurrentIndex];
-        Drawable drawable = ContextCompat.getDrawable(this, image.getPicture());
-        Bitmap bitmap = ((BitmapDrawable)drawable).getBitmap();
-        bitmap.compress(Bitmap.CompressFormat.JPEG, 60, byteArrayOutputStream);
-
-        File folder = getExternalFilesDir("Shared Image");// Folder Name
-        File myFile = new File(folder, "myImage.png");// Filename
-        saveDataToExternalStorage(myFile, byteArrayOutputStream);
 
         Intent intent = new Intent(MainActivity.this, ShareActivity.class);
+        intent.putExtra(Constants.QUESTION_IMAGE, image.getPicture());
         startActivity(intent);
     }
-
-    private void saveDataToExternalStorage(File myFile, ByteArrayOutputStream byteArrayOutputStream) {
-        FileOutputStream fileOutputStream = null;
-        try {
-            fileOutputStream = new FileOutputStream(myFile);
-            fileOutputStream.write(byteArrayOutputStream.toByteArray());
-        } catch (Exception e) {
-            e.printStackTrace();
-        } finally {
-            if (fileOutputStream != null) {
-                try {
-                    fileOutputStream.close();
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-            }
-        }
-    }
-
 
     /**
      * Asking for a permission to save data in external storage.

@@ -13,15 +13,7 @@ public class CulturalWord {
         return picture;
     }
 
-    public void setPicture(int picture) {
-        this.picture = picture;
-    }
-
     public int getName() {
         return name;
-    }
-
-    public void setName(int name) {
-        this.name = name;
     }
 }
