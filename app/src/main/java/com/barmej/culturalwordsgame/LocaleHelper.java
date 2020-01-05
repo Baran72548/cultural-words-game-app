@@ -1,5 +1,6 @@
 package com.barmej.culturalwordsgame;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.res.Configuration;
 import android.content.res.Resources;
@@ -11,6 +12,7 @@ public class LocaleHelper {
         return updateResourcesLegacy(context, language);
     }
 
+    @SuppressLint("NewApi")
     private static Context updateResourcesLegacy(Context context, String language){
         Locale locale = new Locale(language);
         locale.setDefault(locale);
@@ -19,6 +21,7 @@ public class LocaleHelper {
 
         Configuration configuration = resources.getConfiguration();
         configuration.locale = locale;
+        configuration.setLayoutDirection(locale);
 
         resources.updateConfiguration(configuration, resources.getDisplayMetrics());
 
