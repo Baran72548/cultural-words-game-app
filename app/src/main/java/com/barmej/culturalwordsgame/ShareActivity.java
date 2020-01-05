@@ -75,7 +75,9 @@ public class ShareActivity extends AppCompatActivity {
         });
     }
 
-
+    /**
+     * Saving shared image in external storage and get its URI to pass it through the intent.
+     */
     public Uri getBitmapFromDrawable(Bitmap bitmap){
         // Store image to default external storage directory
         Uri imageUri = null;
