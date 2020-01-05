@@ -1,6 +1,7 @@
 package com.barmej.culturalwordsgame;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
@@ -13,6 +14,7 @@ import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -138,6 +140,31 @@ public class MainActivity extends AppCompatActivity {
         SharedPreferences.Editor editor = sharedPreferences.edit();
         editor.putString(Constants.APP_LANG, lang);
         editor.apply();
+    }
+
+    /**
+     * Saving current state of activity for rotation case.
+     */
+    @Override
+    protected void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+        outState.putInt(Constants.BUNDLE_CURRENT_INDEX, mCurrentIndex);
+    }
+
+    /**
+     * Restore the saved state of activity after rotation.
+     */
+    @Override
+    protected void onRestoreInstanceState(@NonNull Bundle savedInstanceState) {
+        super.onRestoreInstanceState(savedInstanceState);
+        if (savedInstanceState != null) {
+            mCurrentIndex = savedInstanceState.getInt(Constants.BUNDLE_CURRENT_INDEX);
+            if (mCurrentIndex != 0) {
+                CulturalWord image = mCulturalWords[mCurrentIndex];
+                Drawable culturalIcon = ContextCompat.getDrawable(this, image.getPicture());
+                mCultureIconImageView.setImageDrawable(culturalIcon);
+            }
+        }
     }
 
     /**
