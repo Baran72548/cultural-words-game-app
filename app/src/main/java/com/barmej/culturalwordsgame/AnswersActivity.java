@@ -1,5 +1,6 @@
 package com.barmej.culturalwordsgame;
 
+import android.content.Context;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.TextView;
@@ -25,6 +26,11 @@ public class AnswersActivity extends AppCompatActivity {
             mAnswerTextView.setText(answer);
             mAnswerDescriptionTextView.setText(answerDescription);
         }
+    }
+
+    @Override
+    protected void attachBaseContext(Context base) {
+        super.attachBaseContext(LocaleHelper.onAttach(base));
     }
 
     public void onReturnClicked(View view) {

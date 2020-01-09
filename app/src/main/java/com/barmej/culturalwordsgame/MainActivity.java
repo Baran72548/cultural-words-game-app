@@ -1,33 +1,26 @@
 package com.barmej.culturalwordsgame;
 
 import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 
-import android.Manifest;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.content.pm.PackageManager;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
-import android.widget.Toast;
 
 import java.util.Random;
 
 public class MainActivity extends AppCompatActivity {
-
-    private static final int PERMISSIONS_WRITE_EXTERNAL_STORAGE = 123;
 
     private ImageView mCultureIconImageView;
 
@@ -46,7 +39,7 @@ public class MainActivity extends AppCompatActivity {
             new CulturalWord(R.drawable.icon_12, R.string.emama),
             new CulturalWord(R.drawable.icon_13, R.string.dishdasha)
     };
-    private String[] ANSWERS_DESCRIPTION;
+    private String[] answersDescription;
 
     private Random mRandom = new Random();
     private int mCurrentIndex = 0;
@@ -63,7 +56,7 @@ public class MainActivity extends AppCompatActivity {
 
         setContentView(R.layout.activity_main);
 
-        ANSWERS_DESCRIPTION = getResources().getStringArray(R.array.answer_description);
+        answersDescription = getResources().getStringArray(R.array.answer_description);
 
         mCultureIconImageView = findViewById(R.id.icon_image_view);
         Button changeQuestion = findViewById(R.id.change_question_button);
@@ -82,7 +75,7 @@ public class MainActivity extends AppCompatActivity {
                 String name = getResources().getString(answer.getName());
                 Intent intent = new Intent(MainActivity.this, AnswersActivity.class);
                 intent.putExtra(Constants.QUESTION_ANSWER, name + ":");
-                intent.putExtra(Constants.QUESTION_ANSWER_DESCRIPTION, ANSWERS_DESCRIPTION[mCurrentIndex]);
+                intent.putExtra(Constants.QUESTION_ANSWER_DESCRIPTION, answersDescription[mCurrentIndex]);
                 startActivity(intent);
             }
         });
@@ -101,7 +94,7 @@ public class MainActivity extends AppCompatActivity {
             showLanguageDialog();
             return true;
         } else if (item.getItemId() == R.id.share_menu){
-            checkPermissionAndShare();
+            shareImage();
             return true;
         } else {
             return super.onOptionsItemSelected(item);
@@ -126,10 +119,11 @@ public class MainActivity extends AppCompatActivity {
                         //Call saveLanguage() method in case the user exit the application.
                         saveLanguage(language);
                         LocaleHelper.setLocale(MainActivity.this, language);
-                        Intent intent = new Intent(getApplicationContext(), MainActivity.class);
-                        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                        startActivity(intent);
+                        recreate();
+//                        Intent intent = new Intent(getApplicationContext(), MainActivity.class);
+//                        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+//                        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+//                        startActivity(intent);
                     }
                 }).create();
         alertDialog.show();
@@ -157,13 +151,11 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onRestoreInstanceState(@NonNull Bundle savedInstanceState) {
         super.onRestoreInstanceState(savedInstanceState);
-        if (savedInstanceState != null) {
-            mCurrentIndex = savedInstanceState.getInt(Constants.BUNDLE_CURRENT_INDEX);
-            if (mCurrentIndex != 0) {
-                CulturalWord image = mCulturalWords[mCurrentIndex];
-                Drawable culturalIcon = ContextCompat.getDrawable(this, image.getPicture());
-                mCultureIconImageView.setImageDrawable(culturalIcon);
-            }
+        mCurrentIndex = savedInstanceState.getInt(Constants.BUNDLE_CURRENT_INDEX);
+        if (mCurrentIndex != 0) {
+            CulturalWord image = mCulturalWords[mCurrentIndex];
+            Drawable culturalIcon = ContextCompat.getDrawable(this, image.getPicture());
+            mCultureIconImageView.setImageDrawable(culturalIcon);
         }
     }
 
@@ -176,56 +168,6 @@ public class MainActivity extends AppCompatActivity {
         Intent intent = new Intent(MainActivity.this, ShareActivity.class);
         intent.putExtra(Constants.QUESTION_IMAGE, image.getPicture());
         startActivity(intent);
-    }
-
-    /**
-     * Asking for a permission to save data in external storage.
-     */
-    private void checkPermissionAndShare(){
-        if (ContextCompat.checkSelfPermission(this,
-                Manifest.permission.WRITE_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED){
-            // Here we don't have the permission so, we need to ask the user for it.
-            if (ActivityCompat.shouldShowRequestPermissionRationale(this,
-                    Manifest.permission.WRITE_EXTERNAL_STORAGE)) {
-                // App doesn't have the permission this is why we need to explain the reason to the user.
-                AlertDialog alertDialog = new AlertDialog.Builder(this)
-                        .setMessage(R.string.permission_explanation)
-                        .setPositiveButton(android.R.string.ok, new DialogInterface.OnClickListener() {
-                            @Override
-                            public void onClick(DialogInterface dialogInterface, int i) {
-                                ActivityCompat.requestPermissions(MainActivity.this,
-                                        new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE},
-                                        PERMISSIONS_WRITE_EXTERNAL_STORAGE);
-                            }
-                        }).setNegativeButton(android.R.string.cancel, new DialogInterface.OnClickListener() {
-                            @Override
-                            public void onClick(DialogInterface dialogInterface, int i) {
-                                dialogInterface.dismiss();
-                            }
-                        }).create();
-
-                alertDialog.show();
-            } else {
-                // Here we don't need to explain why we need the permission.
-                ActivityCompat.requestPermissions(this,
-                        new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE},
-                        PERMISSIONS_WRITE_EXTERNAL_STORAGE);
-            }
-        } else {
-            // Here we already have a permission so, directly call shareImage method.
-            shareImage();
-        }
-    }
-
-    @Override
-    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
-        if (requestCode == PERMISSIONS_WRITE_EXTERNAL_STORAGE){
-            if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED){
-                shareImage();
-            } else {
-                Toast.makeText(MainActivity.this, R.string.permission_explanation, Toast.LENGTH_SHORT).show();
-            }
-        }
     }
 
     /**
